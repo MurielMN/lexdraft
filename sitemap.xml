@@ -1,28 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#09090e" />
-    <meta name="description" content="Free AI-powered legal document generator. Living wills, power of attorney, leases, NDAs, funeral arrangements, revocable trusts, and 36 more documents. State-specific. English and Spanish. No signup required." />
-    <meta name="keywords" content="free legal documents, living will, power of attorney, lease agreement, NDA, funeral pre-arrangement, cremation authorization, DNR, LLC operating agreement, free legal forms, legal document generator" />
-    <meta property="og:title" content="LexDraftVault — Free AI Legal Document Generator" />
-    <meta property="og:description" content="36 legal documents, AI-generated, state-specific, English or Spanish. Free. No signup. Instant." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.lexdraftvault.com" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="LexDraftVault — Free Legal Documents, AI-Generated" />
-    <meta name="twitter:description" content="Living wills, power of attorney, leases, NDAs, funeral arrangements and 36 more. Free. Instant. All 50 states." />
-    <link rel="canonical" href="https://www.lexdraftvault.com" />
-    <title>LexDraftVault — Free Legal Document Generator | AI-Powered | All 50 States</title>
-    <!-- Google Analytics 4 — replace G-XXXXXXXXXX with your ID -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script> -->
-    <!-- Google AdSense — replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID -->
-    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
-  </head>
-  <body>
-    <noscript>Enable JavaScript to use LexDraftVault.</noscript>
-    <div id="root"></div>
-  </body>
-</html>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.lexdraftvault.com/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.lexdraftvault.com/#living-will</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#advance-directive</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#power-of-attorney</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#funeral-pre-arrangement</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#cremation-authorization</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#dnr-order</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#organ-donation</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#revocable-living-trust</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#last-will-testament</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#lease-agreement</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#eviction-notice</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#quitclaim-deed</loc><priority>0.9</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#nda</loc><priority>0.8</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#llc-operating-agreement</loc><priority>0.8</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#independent-contractor</loc><priority>0.8</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#bill-of-sale</loc><priority>0.8</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#prenuptial-agreement</loc><priority>0.8</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#employment-contract</loc><priority>0.8</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#home-health-care-agreement</loc><priority>0.8</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#childcare-enrollment</loc><priority>0.8</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#volunteer-agreement</loc><priority>0.7</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#donor-gift-agreement</loc><priority>0.7</priority></url>
+  <url><loc>https://www.lexdraftvault.com/#grant-agreement</loc><priority>0.7</priority></url>
+</urlset>
