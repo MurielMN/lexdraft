@@ -1,8 +1,9 @@
 {
   "name": "lexdraft",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "dependencies": {
+    "ajv": "^8.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1"
