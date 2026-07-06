@@ -9,6 +9,12 @@
   CI = "false"
 
 [[redirects]]
+  from = "/ads.txt"
+  to = "https://srv.adstxtmanager.com/19390/lexdraftvault.com"
+  status = 301
+  force = true
+
+  [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
