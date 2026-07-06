@@ -694,9 +694,8 @@ export default function App() {
   const copyDoc = () => { navigator.clipboard.writeText(docText); setCopied(true); setTimeout(() => setCopied(false), 2000); };
   const printDoc = () => {
     const w = window.open("", "_blank");
-    w.document.write(`<html><head><title>${selectedDoc?.name}</title>
-    <style>body{font-family:Georgia,serif;max-width:820px;margin:48px auto;padding:0 24px;font-size:11.5pt;line-height:1.75;color:#111}pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:11.5pt;line-height:1.75}@media print{body{margin:0;padding:16px}}</style></head>
-    <body><pre>${docText}</pre></body></html>`);
+    const printTitle = selectedDoc ? selectedDoc.name : "Document";
+    w.document.write("<html><head><title>" + printTitle + "</title><style>body{font-family:Georgia,serif;max-width:820px;margin:48px auto;padding:0 24px;font-size:11.5pt;line-height:1.75;color:#111}pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:11.5pt;line-height:1.75}@media print{body{margin:0;padding:16px}}</style></head><body><pre>" + docText + "</pre></body></html>");
     w.document.close(); setTimeout(() => w.print(), 400);
   };
 
