@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const CATEGORIES = [
   { id: "end_of_life", label: "End-of-Life Planning", icon: "🕊️", color: "#9b8abf" },
@@ -655,6 +655,35 @@ function generateDocument(docId, formData, language) {
   return body + disclaimer(language||"en");
 }
 
+
+// ─── MONETIZATION: post-generation next steps (links resolve via netlify.toml /go/*) ───
+const NEXT_STEPS = {
+  end_of_life: [
+    { t: "Get it notarized online", d: "Many states require a notary or witnesses. Notarize from home in minutes.", u: "/go/notary" },
+    { t: "Build your full estate plan", d: "Pair this with a will and trust reviewed by professionals.", u: "/go/estate" },
+    { t: "Talk to an attorney", d: "Get an attorney to review your directive for your state.", u: "/go/attorney" },
+  ],
+  personal: [
+    { t: "Build your full estate plan", d: "Will, trust and power of attorney in one guided plan.", u: "/go/estate" },
+    { t: "Get it notarized online", d: "Sign and notarize remotely where your state allows it.", u: "/go/notary" },
+    { t: "Talk to an attorney", d: "Have a licensed attorney review before you sign.", u: "/go/attorney" },
+  ],
+  real_estate: [
+    { t: "Screen tenants and collect rent", d: "Landlord tools for applications, background checks and rent.", u: "/go/landlord" },
+    { t: "Get it signed electronically", d: "Send for e-signature and keep a legal record.", u: "/go/esign" },
+    { t: "Talk to an attorney", d: "Evictions and deeds are state-specific. Get a review.", u: "/go/attorney" },
+  ],
+  business: [
+    { t: "Form your LLC", d: "Register your business in any state.", u: "/go/llc" },
+    { t: "Get it signed electronically", d: "Send for e-signature and keep a legal record.", u: "/go/esign" },
+    { t: "Talk to an attorney", d: "Have a business attorney review key agreements.", u: "/go/attorney" },
+  ],
+  default: [
+    { t: "Get it signed electronically", d: "Send for e-signature and keep a legal record.", u: "/go/esign" },
+    { t: "Talk to an attorney", d: "Have a licensed attorney review before you sign.", u: "/go/attorney" },
+  ],
+};
+
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 export default function App() {
   const [activeCat, setActiveCat] = useState("end_of_life");
@@ -666,6 +695,28 @@ export default function App() {
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState("form");
   const streamRef = useRef("");
+
+
+  // Deep links from landing pages: /#doc=living_will&state=Texas  or  /#real_estate
+  useEffect(() => {
+    try {
+      const raw = (window.location.hash || "").replace(/^#/, "");
+      if (!raw) return;
+      const params = new URLSearchParams(raw);
+      const docId = params.get("doc");
+      if (docId) {
+        const d = DOCS.find((x) => x.id === docId);
+        if (d) {
+          setActiveCat(d.cat);
+          setSelectedDoc(d);
+          const st = params.get("state");
+          setFormData(st && d.fields.some((f) => f.id === "state") ? { state: st } : {});
+        }
+      } else if (CATEGORIES.some((c) => c.id === raw)) {
+        setActiveCat(raw);
+      }
+    } catch (e) { /* ignore bad hash */ }
+  }, []);
 
   const catDocs = DOCS.filter((d) => d.cat === activeCat);
   const catMeta = CATEGORIES.find((c) => c.id === activeCat);
@@ -844,6 +895,20 @@ export default function App() {
                           {docText}
                           {generating&&<span style={{display:"inline-block",width:2,height:12,background:G,marginLeft:2,animation:"blink .7s infinite"}}/>}
                         </pre>
+                        {docText&&!generating&&(
+                          <div style={{marginTop:22,paddingTop:16,borderTop:`1px solid ${BD}`}}>
+                            <div style={{fontSize:10,color:G,letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:10}}>Next step</div>
+                            <div style={{display:"flex",flexWrap:"wrap",gap:10}}>
+                              {(NEXT_STEPS[selectedDoc.cat]||NEXT_STEPS.default).map((n)=>(
+                                <a key={n.u} href={n.u} target="_blank" rel="sponsored noopener noreferrer" style={{flex:"1 1 200px",background:"#1a1828",border:`1px solid ${BD2}`,borderRadius:6,padding:"10px 12px",textDecoration:"none"}}>
+                                  <div style={{fontSize:12,color:G,marginBottom:3}}>{n.t} →</div>
+                                  <div style={{fontSize:10.5,color:MU,lineHeight:1.6}}>{n.d}</div>
+                                </a>
+                              ))}
+                            </div>
+                            <div style={{fontSize:9,color:HT,marginTop:8}}>Affiliate disclosure: we may earn a commission if you use these partners, at no extra cost to you.</div>
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
@@ -862,7 +927,7 @@ export default function App() {
           <div style={{background:BG3,border:`1px solid ${BD}`,borderRadius:6,padding:"9px 9px"}}>
             <div style={{fontSize:8.5,color:MU,fontWeight:600,letterSpacing:"0.08em",textTransform:"uppercase",marginBottom:5}}>Need a lawyer?</div>
             <div style={{fontSize:9,color:HT,lineHeight:1.7,marginBottom:7}}>Complex situation? Connect with a licensed attorney in your state.</div>
-            <a href="#" style={{display:"block",textAlign:"center",background:"#1a1828",border:`1px solid ${BD2}`,borderRadius:4,padding:"5px 7px",fontSize:9,color:G,textDecoration:"none"}}>Find an Attorney →</a>
+            <a href="/go/attorney" target="_blank" rel="sponsored noopener noreferrer" style={{display:"block",textAlign:"center",background:"#1a1828",border:`1px solid ${BD2}`,borderRadius:4,padding:"5px 7px",fontSize:9,color:G,textDecoration:"none"}}>Find an Attorney →</a>
           </div>
           <div style={{background:BG3,border:`1px dashed ${BD2}`,borderRadius:6,minHeight:200,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:8}}>
             <div style={{fontSize:7.5,color:HT,letterSpacing:"0.1em",textTransform:"uppercase",marginBottom:3}}>Advertisement</div>
@@ -871,14 +936,14 @@ export default function App() {
           <div style={{background:BG3,border:`1px solid ${BD}`,borderRadius:6,padding:"9px 9px"}}>
             <div style={{fontSize:8.5,color:MU,fontWeight:600,letterSpacing:"0.08em",textTransform:"uppercase",marginBottom:5}}>Form LLC / Corp</div>
             <div style={{fontSize:9,color:HT,lineHeight:1.7,marginBottom:7}}>Register your business in any state — fast and affordable.</div>
-            <a href="#" style={{display:"block",textAlign:"center",background:"#1a1828",border:`1px solid ${BD2}`,borderRadius:4,padding:"5px 7px",fontSize:9,color:G,textDecoration:"none"}}>Start Now →</a>
+            <a href="/go/llc" target="_blank" rel="sponsored noopener noreferrer" style={{display:"block",textAlign:"center",background:"#1a1828",border:`1px solid ${BD2}`,borderRadius:4,padding:"5px 7px",fontSize:9,color:G,textDecoration:"none"}}>Start Now →</a>
           </div>
           <div style={{background:BG3,border:`1px solid ${BD}`,borderRadius:6,padding:"9px 9px"}}>
             <div style={{fontSize:8.5,color:MU,fontWeight:600,letterSpacing:"0.08em",textTransform:"uppercase",marginBottom:5}}>Pre-Plan Funeral</div>
             <div style={{fontSize:9,color:HT,lineHeight:1.7,marginBottom:7}}>Protect your family. Lock in today's prices with a preneed plan.</div>
-            <a href="#" style={{display:"block",textAlign:"center",background:"#1a1828",border:`1px solid ${BD2}`,borderRadius:4,padding:"5px 7px",fontSize:9,color:G,textDecoration:"none"}}>Learn More →</a>
+            <a href="/go/funeral" target="_blank" rel="sponsored noopener noreferrer" style={{display:"block",textAlign:"center",background:"#1a1828",border:`1px solid ${BD2}`,borderRadius:4,padding:"5px 7px",fontSize:9,color:G,textDecoration:"none"}}>Learn More →</a>
           </div>
-          <div style={{fontSize:7.5,color:HT,lineHeight:1.7,marginTop:"auto",paddingTop:7,borderTop:`1px solid ${BD}`}}>Not legal advice. Consult an attorney for your situation.</div>
+          <div style={{fontSize:7.5,color:HT,lineHeight:1.7,marginTop:"auto",paddingTop:7,borderTop:`1px solid ${BD}`}}>Not legal advice. Consult an attorney for your situation. Some links are affiliate links; we may earn a commission at no cost to you.</div>
         </div>
       </div>
 
