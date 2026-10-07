@@ -1,5 +1,15 @@
 User-agent: *
 Allow: /
-Disallow: /api/
+Disallow: /go/
+Crawl-delay: 1
+
+User-agent: Googlebot
+Allow: /
+Disallow: /go/
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Disallow: /go/
 
 Sitemap: https://www.lexdraftvault.com/sitemap.xml

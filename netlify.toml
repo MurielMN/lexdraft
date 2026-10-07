@@ -8,13 +8,102 @@
   SKIP_PREFLIGHT_CHECK = "true"
   CI = "false"
 
+# ── Canonical host: force https + www ──
+[[redirects]]
+  from = "https://lexdraftvault.com/*"
+  to = "https://www.lexdraftvault.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://lexdraftvault.com/*"
+  to = "https://www.lexdraftvault.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.lexdraftvault.com/*"
+  to = "https://www.lexdraftvault.com/:splat"
+  status = 301
+  force = true
+
+# ── Ezoic ads.txt manager (existing) ──
 [[redirects]]
   from = "/ads.txt"
   to = "https://srv.adstxtmanager.com/19390/lexdraftvault.com"
   status = 301
   force = true
 
-  [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# ── Friendly trust-page URLs ──
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy-policy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms-of-use"
+  to = "/terms"
+  status = 301
+  force = true
+
+# ── Affiliate / partner links ──
+# Every monetized link on the site points to /go/<name>.
+# TODAY these go to each partner's public homepage (no commission).
+# To earn: replace each `to` with your tracking link from Impact.com, Rocket Lawyer,
+# LegalZoom, etc. One edit here updates the whole site.
+[[redirects]]
+  from = "/go/notary"
+  to = "https://www.notarize.com/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/go/estate"
+  to = "https://www.trustandwill.com/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/go/attorney"
+  to = "https://www.rocketlawyer.com/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/go/llc"
+  to = "https://www.legalzoom.com/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/go/esign"
+  to = "https://www.docusign.com/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/go/landlord"
+  to = "https://www.avail.co/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/go/funeral"
+  to = "https://www.everplans.com/"
+  status = 302
+  force = true
+
+# NOTE: the old catch-all `/* -> /index.html 200` was removed. It served the app shell for
+# every unknown URL (soft 404s). Unknown paths now return public/404.html with a real 404.
+
+[[headers]]
+  for = "/go/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
